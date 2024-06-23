@@ -1,9 +1,10 @@
-import logo from './logo.svg';
 import './styles/App.css';
-import Form from './Form';
+import SignIn from './components/SignIn';
+import SignUp from "./components/SignUp";
 
 export default function App() {
   return (
-    <Form/>
+    // <SignIn/>
+      <SignUp/>
   )
 }
