@@ -15,7 +15,8 @@ app.post("/create_user", async (req, res) => {
     try {
         const { uname, password } = req.body;
         const newUser = await pool.query(
-            `INSERT INTO users (uname, hashedpw) VALUES(${uname}, ${password});`
+            "INSERT INTO users (uname, hashedpw) VALUES($1, $2);",
+            [uname, password]
         )
         console.log(`The user ${uname} has been created`);
     } catch (error) {
