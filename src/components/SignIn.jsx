@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logo from "../assets/hackhero_logo.png"
 
 export default function SignIn() {
     return (
@@ -6,9 +7,9 @@ export default function SignIn() {
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <img
-              className="mx-auto h-10 w-auto"
-              src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png"
-              alt="Your Company"
+              className="mx-auto h-20 w-auto"
+              src={logo}
+              alt="Hack Hero"
             />
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Sign in to your account
