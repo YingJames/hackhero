@@ -10,10 +10,10 @@ CREATE TABLE if not exists Admins (
     CONSTRAINT FK_Admin FOREIGN KEY (UID) REFERENCES Users (UID) ON DELETE CASCADE,
     CONSTRAINT PK_Admin PRIMARY KEY (UID)
 );
-CREATE TABLE if not exists Player (
+CREATE TABLE if not exists Players (
     UID UUID NOT NULL,
-    CONSTRAINT FK_Player FOREIGN KEY (UID) REFERENCES Users (UID) ON DELETE CASCADE,
-    CONSTRAINT PK_Player PRIMARY KEY (UID)
+    CONSTRAINT FK_Players FOREIGN KEY (UID) REFERENCES Users (UID) ON DELETE CASCADE,
+    CONSTRAINT PK_Players PRIMARY KEY (UID)
 );
 CREATE TABLE if not exists Problems (
     PID UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -39,7 +39,7 @@ CREATE TABLE if not exists Features (
     CONSTRAINT PK_Features PRIMARY KEY (QID, PID, Type)
 );
 CREATE TABLE if not exists CompletedBy (
-    UID UUID REFERENCES Player,
+    UID UUID REFERENCES Players,
     PID UUID REFERENCES Problems,
     Type VARCHAR(20) REFERENCES Topics,
     Date DATE NOT NULL DEFAULT (current_date),
