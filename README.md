@@ -1,10 +1,6 @@
-# Getting Started with Create React App
+# Getting Started with the Hack Hero App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
 
 ## Setting up the Frontend UI
 Make sure you are on the outer most directory level of the project before running the following command:
