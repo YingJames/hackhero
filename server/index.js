@@ -13,12 +13,13 @@ app.use(express.json()); // gives access to the request body
 // create user
 app.post("/create_user", async (req, res) => {
     try {
-        const { uname, password } = req.body;
+        const { email, password } = req.body;
         const newUser = await pool.query(
-            "INSERT INTO users (uname, hashedpw) VALUES($1, $2);",
-            [uname, password]
+            "INSERT INTO Users (uname, hashedpw) VALUES($1, $2);",
+            [email, password]
         )
-        console.log(`The user ${uname} has been created`);
+        res.json(newUser.rows[0]);
+        console.log(`The user ${email} has been created`);
     } catch (error) {
         console.log(error.message);
     }
