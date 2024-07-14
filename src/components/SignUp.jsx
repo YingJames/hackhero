@@ -15,7 +15,7 @@ export default function SignUp() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email: email, password: password }),
+        body: JSON.stringify({ email: email, username: username, password: password }),
       });
       console.log("sent response");
 

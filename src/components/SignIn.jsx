@@ -1,7 +1,43 @@
 import { Link } from "react-router-dom";
+import { useState } from 'react';
 import logo from "../assets/hackhero_logo.png"
 
 export default function SignIn() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError(''); // Clear any previous errors
+
+  try {
+    const response = await fetch('http://localhost:5000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Login successful:', data);
+      // Here you can handle successful login, e.g., store the token, redirect the user
+      // Example: localStorage.setItem('token', data.token);
+      // Example: history.push('/dashboard');
+    } else {
+      const errorData = await response.json();
+      console.error('Login failed');
+      setError(errorData.error || 'An error occurred during login')
+      // Here you can handle failed login, e.g., show an error message
+    }
+    } catch (error) {
+      console.error('Error during login:', error);
+      // Here you can handle network errors or other exceptions
+    }
+  };
+
     return (
       <>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -17,7 +53,12 @@ export default function SignIn() {
           </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-6" method="POST" onSubmit={handleSubmit}>
+              {error && (
+                <div className="text-red-600 text-sm mb-4">
+                  {error}
+                </div>
+              )}
               <div>
                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                   Email address
@@ -30,6 +71,8 @@ export default function SignIn() {
                     autoComplete="email"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
               </div>
@@ -48,6 +91,8 @@ export default function SignIn() {
                     autoComplete="current-password"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
               </div>
